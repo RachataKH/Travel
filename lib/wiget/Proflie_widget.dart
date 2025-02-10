@@ -10,7 +10,7 @@ class ProflieWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: [
       const CircleAvatar(
-        backgroundImage: AssetImage('image/test1.jpg'),
+        backgroundImage: AssetImage('image/Toon.jpg'),
         radius: 30,
       ),
       const Spacer(),

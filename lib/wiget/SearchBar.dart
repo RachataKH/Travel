@@ -11,7 +11,7 @@ class SearchABar extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 5),
-          hintText: 'Spot Area',
+          hintText: 'Location',
           hintStyle: TextStyle(color: secondaryColors.withOpacity(0.5)),
           filled: true,
           border: OutlineInputBorder(

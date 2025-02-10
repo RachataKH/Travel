@@ -12,30 +12,31 @@ class IconTab extends StatelessWidget {
     return Row(
       children: [
         IconWidget(
-          title: 'Forest',
-          color: forestColor,
+          title: 'Forrest',
+          color: primaryColors,
           icon: Icons.forest,
         ),
         SizedBox(
           width: 120,
         ),
-        IconWidget(title: 'Coast', color: riverColor, icon: Icons.water_drop),
+        IconWidget(
+            title: 'Mountain', color:primaryColors, icon: Icons.filter_hdr),
         SizedBox(
           width: 120,
         ),
         IconWidget(
-            title: 'Mountain', color: mountainColor, icon: Icons.filter_hdr),
+            title: 'National Park', color:primaryColors, icon: Icons.fence),
         SizedBox(
           width: 120,
         ),
         IconWidget(
-            title: 'Volcano',
-            color: volcanoColor,
-            icon: Icons.local_fire_department),
+          title: 'Pools', color: primaryColors, icon: Icons.water_drop),
         SizedBox(
           width: 120,
         ),
-        IconWidget(title: 'Ocean', color: oceanColor, icon: Icons.waves),
+        IconWidget(
+          title: 'Ocean', color: primaryColors, icon: Icons.waves
+          ),
       ],
     );
   }
