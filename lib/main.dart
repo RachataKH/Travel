@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mytravel/Home_screen.dart';
+import 'package:mytravel/Screen/onboardingscreen.dart';
 
-void main() {
+
+bool show = true;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  show = prefs.getBool('ON_BOARDING') ?? true;
+
   runApp(const MyTravel());
 }
 
@@ -16,7 +24,7 @@ class MyTravel extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(textTheme: GoogleFonts.lexendTextTheme()),
       title: "My Traveloka 4.0",
-      home: HomeScreen(),
+      home: show ? OnBoardingScreen() : HomeScreen(),
     );
   }
 }
