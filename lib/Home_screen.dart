@@ -1,14 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:mytravel/constant/color.dart';
-import 'package:mytravel/model/data.dart';
+//import 'package:mytravel/model/data.dart';
 import 'package:mytravel/wiget/Destination.dart';
 import 'package:mytravel/wiget/Proflie_widget.dart';
 import 'package:mytravel/wiget/SearchBar.dart';
 import 'package:mytravel/wiget/icons.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  List destinationAPI = [];
+  bool isLoading = true;
+
+  @override
+  void initState(){
+    super.initState();
+    fetchData();
+  }
+  Future<void> fetchData() async {
+    final response = await http.get(Uri.parse('http://localhost:3000/items'));
+    if (response.statusCode == 200) {
+      setState(() {
+        destinationAPI = json.decode(response.body);
+        isLoading = false;
+        // print(destinationAPI);
+      });
+    } else {
+      throw Exception('Failed to load products');
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +107,8 @@ class HomeScreen extends StatelessWidget {
                 childAspectRatio: 0.75,
                 crossAxisSpacing: 24,
                 mainAxisSpacing: 24,
-                children: List.generate(destinations.length, (index) {
-                  var e = destinations[index];
+                children: List.generate(destinationAPI.length, (index) {
+                  //var e = destinations[index];
 
                   return AnimationConfiguration.staggeredGrid(
                       position: index,
@@ -84,10 +116,10 @@ class HomeScreen extends StatelessWidget {
                       child: SlideAnimation(
                           child: FadeInAnimation(
                               child: DestinationWidget(
-                                  name: e.name,
-                                  image: e.image,
-                                  rate: e.rate,
-                                  location: e.location))));
+                                  name: destinationAPI[index]["name"],
+                                  image: destinationAPI[index]["image"],
+                                  rate: destinationAPI[index]["rate"],
+                                  location: destinationAPI[index]["location"]))));
                 }),
               ),
             ],
